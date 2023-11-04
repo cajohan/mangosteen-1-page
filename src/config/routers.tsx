@@ -12,7 +12,7 @@ export const routes: RouteRecordRaw[] = [
   { path: '/about', component: Bar },
   {
     path: '/welcome',
-    components: Welcome,
+    component: Welcome,
     children: [
       { path: '1', component: First },
       { path: '2', component: Second },
