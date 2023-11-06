@@ -6,3 +6,8 @@ body{
   font-size: 16px;
   color: #333;
 }
+
+
+::webkit-scrollbar {
+  visibility: hidden;
+}
