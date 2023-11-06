@@ -9,10 +9,20 @@ import { Third } from "../components/welcome/Third";
 import { ThirdActions } from "../components/welcome/ThirdActions";
 import { Welcome } from "../views/Welcome";
 import { StartPage } from "../views/StartPage";
+import { ItemCreate } from "../components/item/ItemCreate";
+import { ItemList } from "../components/item/ItemList";
+import { ItemPage } from "../views/ItemPage";
 
 export const routes: RouteRecordRaw[] = [
   { path: '/', redirect: '/welcome' },
   { path: '/start', component: StartPage },
+  {
+    path: '/items', component: ItemPage,
+    children: [
+      { path: '', component: ItemList },
+      { path: 'create', component: ItemCreate },
+    ]
+  },
   {
     path: '/welcome',
     component: Welcome,
