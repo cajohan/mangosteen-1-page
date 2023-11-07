@@ -28,6 +28,7 @@
   > ol {
     display: flex;
     flex-wrap: wrap;
+    align-content: flex-start;
     font-size: 22px;
     line-height: 32px;
     height: calc(32px * 12);
