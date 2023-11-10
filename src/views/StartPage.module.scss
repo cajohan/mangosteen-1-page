@@ -4,12 +4,11 @@
     padding: 16px 16px;
   }
 }
-
-.pig {
-  width: 128px;
-  height: 128px;
-  &_wrapper {
-    padding: 120px 0;
+.pig_wrapper{
+  padding: 120px 0;
+  > .pig {
+    width: 128px;
+    height: 128px;
   }
 }
 
