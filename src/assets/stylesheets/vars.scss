@@ -17,6 +17,9 @@
   --input-min-height: 48px;
   --input-radius: var(--button-radius);
   --input-shadow: rgba(0,0,0,0.25);
+  --list-tag-text: #333;
+  --list-amount-text: var(--amount-text);
+  --list-time-text: var(--date-text);
   --main: #5c33be;
   --navbar-bg-end: var(--welcome-bg-end);
   --navbar-bg-start: var(--welcome-bg-start);
@@ -32,6 +35,10 @@
   --top-safe-area-height: 24px;
   --transition-duration: 0.5s;
   --tag-bg: #EFEFEF;
+  --total-bg: #252A43;
+  --total-text: white;
+  --total-income: #FE7275;
+  --total-expenses: #53A867;
   --welcome-bg-end: #8f4cd7;
   --welcome-bg-start: #5d33be;
   --welcome-card-bg: white;
