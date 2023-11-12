@@ -14,6 +14,7 @@ import { ItemList } from "../components/item/ItemList";
 import { ItemPage } from "../views/ItemPage";
 import { TagCreate } from "../components/tag/TagCreate";
 import { TagEdit } from "../components/tag/TagEdit";
+import { StatisticsPage } from "../views/StatisticsPage";
 import { TagPage } from "../views/TagPage";
 import { SignInPage } from "../views/SignInPage";
 
@@ -48,5 +49,8 @@ export const routes: RouteRecordRaw[] = [
   },
   {
     path: '/sign_in', component: SignInPage
+  },
+  {
+    path: '/statistics', component: StatisticsPage
   }
 ]
