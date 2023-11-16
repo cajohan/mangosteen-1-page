@@ -29,10 +29,10 @@ export const SignInPage = defineComponent({
       ]))
     }
     const onClickSendValidationCode = async () => {
-      const response = await axios.post('/api/v1/validation_codes',{email: formData.email})
-        .catch(()=>{
-          // 失败
-        })
+      const response = await axios.post('/api/v1/validation_codes', { email: formData.email })
+      .catch(()=>{
+        //失败
+      })
       // 成功
       refValidationCode.value.startCount()
     }
