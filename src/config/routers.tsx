@@ -17,12 +17,19 @@ import { TagEdit } from "../components/tag/TagEdit";
 import { StatisticsPage } from "../views/StatisticsPage";
 import { TagPage } from "../views/TagPage";
 import { SignInPage } from "../views/SignInPage";
+import { http } from "../shared/Http";
 
 export const routes: RouteRecordRaw[] = [
   { path: '/', redirect: '/welcome' },
   { path: '/start', component: StartPage },
   {
     path: '/items', component: ItemPage,
+    beforeEnter: async (to,from,next)=>{
+      await http.get('/me').catch(()=>{
+        next('/sign_in?return_to='+to.path)
+      })
+      next()
+    },
     children: [
       { path: '', component: ItemList },
       { path: 'create', component: ItemCreate },
