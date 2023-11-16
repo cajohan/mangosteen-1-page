@@ -10,6 +10,7 @@ import { http } from '../shared/Http';
 import { userBool } from '../hooks/useBool';
 import { history } from '../shared/history';
 import { useRoute, useRouter } from 'vue-router';
+import { refreshMe } from '../shared/me';
 export const SignInPage = defineComponent({
   setup: (props, context) => {
     const formData = reactive({
@@ -38,6 +39,7 @@ export const SignInPage = defineComponent({
         const response = await http.post<{jwt:string}>('/session', formData)
         localStorage.setItem('jwt', response.data.jwt)
         const returnTo = route.query.return_to?.toString()
+        refreshMe()
         router.push(returnTo || '/')
       }
     }
