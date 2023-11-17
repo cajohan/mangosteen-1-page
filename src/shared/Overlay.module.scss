@@ -17,7 +17,6 @@
   height: calc(100% - var(--top-safe-area-height));
   color: var(--text);
 }
-
 .currentUser {
   padding: 32px 16px;
   background: var(--overlay-user-bg);
@@ -34,8 +33,6 @@
   }
   > .icon {
     margin-right: 12px;
-    width: 1.5em;
-    height: 1.5em;
   }
 }
 .icon{

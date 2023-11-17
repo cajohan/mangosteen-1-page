@@ -10,11 +10,11 @@
     z-index: 1;
     top: 0;
     background: var(--navbar-bg-end);
+
     > li {
       flex-grow: 1;
       flex-shrink: 0;
       padding: 12px 0;
-      
       &.selected {
         position: relative;
         &::after {

@@ -1,15 +1,14 @@
+import { routes } from './config/routes';
 import { createApp } from 'vue'
 import { App } from './App'
-import { createRouter, createWebHashHistory } from 'vue-router'
-import { routes } from './config/routers'
-import { history } from './shared/history'
+import { createRouter } from 'vue-router'
+import { history } from './shared/history';
 import '@svgstore';
-import { fetchMe, mePromise } from './shared/me'
+import { fetchMe, mePromise } from './shared/me';
 
-const router = createRouter({ history: history, routes: routes })
+const router = createRouter({ history, routes })
 
 fetchMe()
-
 
 const whiteList: Record<string, 'exact' | 'startsWith'> = {
   '/': 'exact',
@@ -33,7 +32,6 @@ router.beforeEach((to, from) => {
     () => '/sign_in?return_to=' + to.path
   )
 })
-
 
 const app = createApp(App)
 app.use(router)

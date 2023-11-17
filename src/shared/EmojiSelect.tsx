@@ -53,7 +53,7 @@ export const EmojiSelect = defineComponent({
     return () => (
       <div class={s.emojiList}>
         <nav>
-        {table.map((item, index) =>
+          {table.map((item, index) =>
             <span class={index === refSelected.value ? s.selected : ''}
               onClick={() => onClickTab(index)}>{item[0]}</span>)}
         </nav>

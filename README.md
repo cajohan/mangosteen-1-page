@@ -1,6 +1,6 @@
-# Vue 3 + Typescript + Vite
+# 我的 Vue 3 + TSX 项目
 
-## 如何开发
+## 编码规范
 
 ### ref 默认值
 

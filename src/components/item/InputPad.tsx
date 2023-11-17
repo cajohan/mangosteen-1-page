@@ -65,7 +65,7 @@ export const InputPad = defineComponent({
           <span>
             <span onClick={showDatePicker}>{new Time(refDate.value).format()}</span>
             <Popup position='bottom' v-model:show={refDatePickerVisible.value}>
-              <DatetimePicker v-model={refDate.value} type="date" title="选择年月日"
+              <DatetimePicker value={refDate.value} type="date" title="选择年月日"
                 onConfirm={setDate} onCancel={hideDatePicker}
               />
             </Popup>

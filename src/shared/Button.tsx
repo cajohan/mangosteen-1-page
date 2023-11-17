@@ -1,8 +1,7 @@
-import { PropType, computed, defineComponent, ref } from 'vue';
+import { computed, defineComponent, PropType, ref } from 'vue';
 import s from './Button.module.scss';
 
-interface Props{
-  onClick?: (e: MouseEvent) => void
+interface Props {
 }
 
 export const Button = defineComponent({
@@ -29,7 +28,7 @@ export const Button = defineComponent({
   },
   setup: (props, context) => {
     const selfDisabled = ref(false)
-    const _disabled = computed(()=>{
+    const _disabled = computed(() => {
       if(props.autoSelfDisabled === false){
         return props.disabled
       }
@@ -39,7 +38,7 @@ export const Button = defineComponent({
         return props.disabled
       }
     })
-    const onClick = () =>{
+    const onClick = () => {
       props.onClick?.()
       selfDisabled.value = true
       setTimeout(()=>{

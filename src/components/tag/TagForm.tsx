@@ -31,20 +31,20 @@ export const TagForm = defineComponent({
     }
     return () => (
       <Form onSubmit={onSubmit}>
-      <FormItem label='标签名'
-        type="text"
-        v-model={formData.name}
-        error={errors['name']?.[0]} />
-      <FormItem label={'符号 ' + formData.sign}
-        type="emojiSelect" v-model={formData.sign}
-        error={errors['sign']?.[0]} />
-      <FormItem>
-        <p class={s.tips}>记账时长按标签即可进行编辑</p>
-      </FormItem>
-      <FormItem>
-        <Button class={[s.button]}>确定</Button>
-      </FormItem>
-    </Form>
+        <FormItem label='标签名'
+          type="text"
+          v-model={formData.name}
+          error={errors['name']?.[0]} />
+        <FormItem label={'符号 ' + formData.sign}
+          type="emojiSelect" v-model={formData.sign}
+          error={errors['sign']?.[0]} />
+        <FormItem>
+          <p class={s.tips}>记账时长按标签即可进行编辑</p>
+        </FormItem>
+        <FormItem>
+          <Button class={[s.button]}>确定</Button>
+        </FormItem>
+      </Form>
     )
   }
 })

@@ -7,7 +7,7 @@ declare module '*.vue' {
   export default component
 }
 
-type JSONValue = null | boolean | string | number | JSONValue[] | REcord<string, JSONValue>
+type JSONValue = null | boolean | string | number | JSONValue[] | Record<string, JSONValue>
 
 type Tag = {
   id: number,
