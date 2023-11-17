@@ -10,6 +10,7 @@ export let mePromise:Promise<AxiosResponse<{
 
 export const refreshMe = () => {
   mePromise = http.get<{ resource:{id:number}}>('/me')
+  console.log("mePromise: ",mePromise)
   return mePromise
 }
 
