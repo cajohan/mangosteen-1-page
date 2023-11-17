@@ -6,6 +6,8 @@ import { Tabs, Tab } from '../../shared/Tabs';
 import { InputPad } from './InputPad';
 import { http } from '../../shared/Http';
 import { Button } from '../../shared/Button';
+import { useTags } from '../../shared/useTags';
+
 export const ItemCreate = defineComponent({
   props: {
     name: {
@@ -14,27 +16,23 @@ export const ItemCreate = defineComponent({
   },
   setup: (props, context) => {
     const refKind = ref('支出')
-    const refPage = ref(0)
-    const refHasMore = ref(false)
-    onMounted(async () => {
-      const response = await http.get<Resources<Tag>>('/tags',{
-        kind: 'expenses',
-        _mock: 'tagIndex'
-      })
-      const {resources, pager} = response.data 
-      refExpensesTags.value = resources
-      refHasMore.value = (pager.page - 1)* pager.per_page + resources.length < pager.count
-      console.log(refHasMore.value)
+    const {tags:expensTags, hasMore, fetchTags} = useTags((page)=>{
+        return http.get<Resources<Tag>>('/tags',{
+          kind: 'expenses',
+          page: page+1,
+          _mock: 'tagIndex'
+        })
     })
-    const refExpensesTags = ref<Tag[]>([])
-    onMounted(async () => {
-      const response = await http.get<{ resources: Tag[] }>('/tags', {
+    const { tags: incomeTags,
+      hasMore: hasMore2,
+      fetchTags: fetchTags2
+    } = useTags((page) => {
+      return http.get<Resources<Tag>>('/tags', {
         kind: 'income',
+        page: page+1,
         _mock: 'tagIndex'
       })
-      refIncomeTags.value = response.data.resources
     })
-    const refIncomeTags = ref<Tag[]>([])
     return () => (
       <MainLayout class={s.layout}>{{
         title: () => '记一笔',
@@ -54,43 +52,51 @@ export const ItemCreate = defineComponent({
                   </div>
                 
                 
-                {refExpensesTags.value.map(tag =>
-                  <div class={[s.tag, s.selected]}>
-                    <div class={s.sign}>
-                      {tag.sign}
+                  {expensTags.value.map(tag =>
+                    <div class={[s.tag, s.selected]}>
+                      <div class={s.sign}>
+                        {tag.sign}
+                      </div>
+                      <div class={s.name}>
+                        {tag.name}
+                      </div>
                     </div>
-                    <div class={s.name}>
-                      {tag.name}
-                    </div>
-                  </div>
-                )}
+                  )}
+                </div>
                 <div class={s.more}>
-                  {refHasMore.value ?
+                  {hasMore.value ?
                     <Button class={s.loadMore}>加载更多</Button> :
                     <span class={s.noMore}>没有更多</span>
                   }
                 </div>
-                </div>
               </Tab>
-              <Tab name="收入" class={s.tags_wrapper}>
-                <div class={s.tag}>
-                  <div class={s.sign}>
-                    <Icon name="add" class={s.createTag} />
-                  </div>
-                  <div class={s.name}>
-                    新增
-                  </div>
-                </div>
-                {refIncomeTags.value.map(tag =>
-                  <div class={[s.tag, s.selected]}>
+              <Tab name="收入">
+                <div class={s.tags_wrapper}>
+                  <div class={s.tag}>
                     <div class={s.sign}>
-                      {tag.sign}
+                    <Icon name="add" class={s.createTag} />
                     </div>
                     <div class={s.name}>
-                      {tag.name}
+                      新增
                     </div>
                   </div>
-                )}
+                  {incomeTags.value.map(tag =>
+                    <div class={[s.tag, s.selected]}>
+                      <div class={s.sign}>
+                        {tag.sign}
+                      </div>
+                      <div class={s.name}>
+                        {tag.name}
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div class={s.more}>
+                  {hasMore2.value ?
+                    <Button class={s.loadMore} onClick={fetchTags2}>加载更多</Button> :
+                    <span class={s.noMore}>没有更多</span>
+                  }
+                </div>
               </Tab>
             </Tabs>
             <div class={s.inputPad_wrapper}>
