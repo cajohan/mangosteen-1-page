@@ -22,6 +22,14 @@ type Tag = {
   sign: string;
   kind: expenses | income;
 };
+type Item = {
+  id: number
+  user_id: number
+  amount: number
+  tags_id: number[]
+  happen_at: string
+  kind: expenses | income
+};
 type Resources<T = any> = {
   resources: T[];
   pager: {
@@ -30,3 +38,10 @@ type Resources<T = any> = {
     count: number;
   };
 };
+type Resource<T> = {
+  resource: T
+}
+
+type ResourceError = {
+  errors: Record<string, string[]>
+}
