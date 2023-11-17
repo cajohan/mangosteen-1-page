@@ -12,7 +12,7 @@ export const Tags = defineComponent({
     },
     selected: Number
   },
-  emits: ['update: selected'],
+  emits: ['update:selected'],
   setup: (props, context) => {
     const { tags, hasMore, page, fetchTags } = useTags((page) => {
       return http.get<Resources<Tag>>('/tags', {
@@ -22,7 +22,7 @@ export const Tags = defineComponent({
       })
     })
     const onSelect = (tag: Tag) => {
-      context.emit('update: selected', tag.id)
+      context.emit('update:selected', tag.id)
     }
     return () => <>
       <div class={s.tags_wrapper}>

@@ -1,4 +1,4 @@
-/* 
+/*
   example
   import { Time } from 'shared/time';
   const time = new Time();

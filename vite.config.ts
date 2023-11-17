@@ -22,7 +22,6 @@ export default defineConfig({
     proxy: {
       '/api/v1': {
         target: 'http://120.77.206.191:3000/',
-        
       }
     }
   }
