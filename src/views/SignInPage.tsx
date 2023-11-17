@@ -36,7 +36,8 @@ export const SignInPage = defineComponent({
         { key: 'code', type: 'required', message: '必填' },
       ]))
       if(!hasError(errors)){
-        const response = await http.post<{jwt:string}>('/session', formData)
+        const response = await http.post<{jwt:string}>('/session', formData,{params: { _mock: 'session'}}).catch(onError)
+        console.log(response)
         localStorage.setItem('jwt', response.data.jwt)
         const returnTo = route.query.return_to?.toString()
         refreshMe()
@@ -44,7 +45,8 @@ export const SignInPage = defineComponent({
       }
     }
     const onError = (error: any)=> {
-      if(error.response.status===422){
+      console.log('error:====',error)
+      if(error.response?.status===422){
         Object.assign(errors, error.response.data.errors)
       }
       throw error
