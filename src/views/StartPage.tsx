@@ -1,12 +1,11 @@
-import { defineComponent, ref } from 'vue';
+import { defineComponent } from 'vue';
 import { RouterLink } from 'vue-router';
 import { MainLayout } from '../layouts/MainLayout';
 import { Button } from '../shared/Button';
 import { Center } from '../shared/Center';
 import { FloatButton } from '../shared/FloatButton';
 import { Icon } from '../shared/Icon';
-import { Navbar } from '../shared/Navbar';
-import { Overlay, OverlayIcon } from '../shared/Overlay';
+import { OverlayIcon } from '../shared/Overlay';
 import s from './StartPage.module.scss';
 export const StartPage = defineComponent({
   setup: (props, context) => {
