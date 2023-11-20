@@ -80,7 +80,8 @@ export const Charts = defineComponent({
         kind: kind.value,
         group_by: 'tag_id',
       }, {
-        _mock: 'itemSummary'
+        _mock: 'itemSummary',
+        _autoLoading: true,
       })
       data2.value = response.data.groups
     }
