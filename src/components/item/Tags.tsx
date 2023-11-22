@@ -86,3 +86,4 @@ export const Tags = defineComponent({
     </>
   }
 })
+export default TagCreate
