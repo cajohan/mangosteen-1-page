@@ -24,9 +24,9 @@ export const TagForm = defineComponent({
     const onSubmit = async (e: Event) => {
       e.preventDefault()
       const rules: Rules<typeof formData> = [
-        { key: 'name', type: 'required', message: '必填' },
+        { key: 'name', type: 'required', message: '名字必填' },
         { key: 'name', type: 'pattern', regex: /^.{1,4}$/, message: '只能填 1 到 4 个字符' },
-        { key: 'sign', type: 'required', message: '必填' },
+        { key: 'sign', type: 'required', message: '标签必填' },
       ]
       Object.assign(errors, {
         name: [],

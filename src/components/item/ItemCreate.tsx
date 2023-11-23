@@ -28,7 +28,6 @@ export const ItemCreate = defineComponent({
       amount: 0,
       happen_at: new Date().toISOString()
     })
-    console.log('formData:',formData,selectStore.selectKind)
     const errors = reactive<FormErrors<typeof formData>>({ kind: [], tag_ids: [], amount: [], happen_at: [] })
     const router = useRouter()
     const onError = (error: AxiosError<ResourceError>) => {

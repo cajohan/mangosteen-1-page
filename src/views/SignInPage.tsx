@@ -31,9 +31,9 @@ export const SignInPage = defineComponent({
         email: [], code: []
       })
       Object.assign(errors, validate(formData, [
-        { key: 'email', type: 'required', message: '必填' },
+        { key: 'email', type: 'required', message: '邮箱必填' },
         { key: 'email', type: 'pattern', regex: /.+@.+/, message: '必须是邮箱地址' },
-        { key: 'code', type: 'required', message: '必填' },
+        { key: 'code', type: 'required', message: '验证码必填' },
       ]))
       if (!hasError(errors)) {
         const response = await http.post<{ jwt: string, refresh_token: string }>('/session', formData, {_autoLoading: true})
