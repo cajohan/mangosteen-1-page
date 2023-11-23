@@ -38,8 +38,8 @@ export const TimeTabsLayout = defineComponent({
     const refSelected = ref('本月')
     const time = new Time()
     const tempTime = reactive({
-      start: new Time().format(),
-      end: new Time().format()
+      start: time.format(),
+      end: time.format()
     })
     const customTime = reactive<{
       start?: string
@@ -48,22 +48,22 @@ export const TimeTabsLayout = defineComponent({
     const timeList = [
       {
         start: time.firstDayOfMonth(),
-        end: time.lastDayOfMonth()
+        end: time.lastDayOfMonth().add(1,'day')
       },
       {
         start: time.add(-1, 'month').firstDayOfMonth(),
-        end: time.add(-1, 'month').lastDayOfMonth()
+        end: time.add(-1, 'month').lastDayOfMonth().add(1,'day')
       },
       {
         start: time.firstDayOfYear(),
-        end: time.lastDayOfYear()
+        end: time.lastDayOfYear().add(1,'day')
       }
     ]
     const refOverlayVisible = ref(false)
     const onSubmitCustomTime = (e: Event) => {
       e.preventDefault()
       refOverlayVisible.value = false
-      Object.assign(customTime, tempTime)
+      Object.assign(customTime, tempTime,{end:new Time(tempTime.end).add(1,'day').format()})
     }
     const onSelect = (value: string) => {
       if (value === '自定义时间') {
