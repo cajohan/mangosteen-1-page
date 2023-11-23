@@ -64,6 +64,12 @@ export const SignInPage = defineComponent({
       refValidationCode.value.startCount()
 
     }
+    if(route.query?.preview){
+      Object.assign(formData,{
+        email: '1@.com',
+        code: '123456'
+      })
+    }
     return () => (
       <MainLayout>{
         {
