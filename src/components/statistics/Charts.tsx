@@ -41,6 +41,7 @@ export const Charts = defineComponent({
     })
 
     const fetchData1 = async () => {
+      if(!props.startDate || !props.endDate) { return [] }
       const response = await http.get<{groups: Data1, summary: number}>('/items/summary',{
         happen_after: props.startDate,
         happen_before: props.endDate,
@@ -51,8 +52,7 @@ export const Charts = defineComponent({
       })
       data1.value = response.data.groups
     }
-    onMounted(fetchData1)
-    watch(() => selectStore.selectKindSta, fetchData1)
+    
 
     // data2
 
@@ -73,6 +73,7 @@ export const Charts = defineComponent({
     })
 
     const fetchData2 = async ()=>{
+      if(!props.startDate || !props.endDate) { return [] }
       const response = await http.get<{ groups: Data2; summary: number }>('/items/summary', {
         happen_after: props.startDate,
         happen_before: props.endDate,
@@ -84,8 +85,18 @@ export const Charts = defineComponent({
       })
       data2.value = response.data.groups
     }
-    onMounted(fetchData2)
-    watch(() => selectStore.selectKindSta, fetchData2)
+    onMounted(()=>{
+      fetchData1()
+      fetchData2()
+    })
+    watch(() => props.startDate, ()=>{
+      fetchData1()
+      fetchData2()
+    })
+    watch(() => selectStore.selectKindSta, ()=>{
+      fetchData1()
+      fetchData2()
+    })
     return () => (
       <div class={s.wrapper}>
         <FormItem label='类型' type="select" options={[
