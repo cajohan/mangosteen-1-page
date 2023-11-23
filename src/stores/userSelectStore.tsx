@@ -6,7 +6,7 @@ type SelectState = {
   selectTabSta: string | undefined
   selectKindSta: 'expenses' | 'income' | undefined
 }
-export const useSelectStore = defineStore<string, SelectState, {}, MeActions>('select', {
+export const useSelectStore = defineStore<string, SelectState, {}, {}>('select', {
   state: () => ({
     selectTab: '本月',
     selectKind: 'expenses',
@@ -14,8 +14,6 @@ export const useSelectStore = defineStore<string, SelectState, {}, MeActions>('s
     selectKindSta: 'expenses'
   }),
   actions: {
-    changeSelect(select: keyof SelectState,value: string){
-      this[select] = value
-    }
+    
   }
 })
