@@ -31,8 +31,9 @@ export const http = new Http(DEBUG ? 'api/v1' : 'http://120.77.206.191:3000/api/
 
 http.instance.interceptors.request.use((config) => {
   const jwt = localStorage.getItem('jwt')
+  const refresh_token = localStorage.getItem('refresh_token')
   if (jwt) {
-    config.headers!.Authorization = `Bearer ${jwt}`
+    config.headers!.Authorization = `Bearer ${jwt} ${refresh_token}`
   }
   if (config._autoLoading === true) {
     Toast.loading({

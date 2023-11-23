@@ -36,9 +36,10 @@ export const SignInPage = defineComponent({
         { key: 'code', type: 'required', message: '必填' },
       ]))
       if (!hasError(errors)) {
-        const response = await http.post<{ jwt: string }>('/session', formData, {_autoLoading: true})
+        const response = await http.post<{ jwt: string, refresh_token: string }>('/session', formData, {_autoLoading: true})
           .catch(onError)
         localStorage.setItem('jwt', response.data.jwt)
+        localStorage.setItem('refresh_token', response.data.refresh_token)
         const returnTo = route.query.return_to?.toString()
         meStore.refreshMe()
         router.push(returnTo || '/')
