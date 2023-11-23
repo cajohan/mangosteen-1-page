@@ -46,3 +46,8 @@
   position: relative;
   top: 2px;
 }
+.comming{
+  -webkit-filter: grayscale(1); /* Webkit */
+  filter: gray; /* IE6-9 */  
+  filter: grayscale(1); /* W3C */
+}
