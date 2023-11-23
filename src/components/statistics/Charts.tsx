@@ -6,6 +6,7 @@ import { PieChart } from './PieChart';
 import { Bars } from './Bars';
 import { http } from '../../shared/Http';
 import { Time } from '../../shared/time';
+import { useSelectStore } from '../../stores/userSelectStore';
 
 const DAY = 24 * 3600 * 1000
 
@@ -25,7 +26,7 @@ export const Charts = defineComponent({
     }
   },
   setup: (props, context) => {
-    const kind = ref('expenses')
+    const selectStore = useSelectStore()
     const data1 = ref<Data1>([])
     const betterData1 = computed<[string, number][]>(()=> {
       if(!props.startDate || !props.endDate) { return [] }
@@ -43,7 +44,7 @@ export const Charts = defineComponent({
       const response = await http.get<{groups: Data1, summary: number}>('/items/summary',{
         happen_after: props.startDate,
         happen_before: props.endDate,
-        kind: kind.value,
+        kind: selectStore.selectKindSta,
         group_by: 'happen_at',
       }, {
         _mock: 'itemSummary'
@@ -51,7 +52,7 @@ export const Charts = defineComponent({
       data1.value = response.data.groups
     }
     onMounted(fetchData1)
-    watch(() => kind.value, fetchData1)
+    watch(() => selectStore.selectKindSta, fetchData1)
 
     // data2
 
@@ -75,7 +76,7 @@ export const Charts = defineComponent({
       const response = await http.get<{ groups: Data2; summary: number }>('/items/summary', {
         happen_after: props.startDate,
         happen_before: props.endDate,
-        kind: kind.value,
+        kind: selectStore.selectKindSta,
         group_by: 'tag_id',
       }, {
         _mock: 'itemSummary',
@@ -84,13 +85,13 @@ export const Charts = defineComponent({
       data2.value = response.data.groups
     }
     onMounted(fetchData2)
-    watch(() => kind.value, fetchData2)
+    watch(() => selectStore.selectKindSta, fetchData2)
     return () => (
       <div class={s.wrapper}>
         <FormItem label='类型' type="select" options={[
           { value: 'expenses', text: '支出' },
           { value: 'income', text: '收入' }
-        ]} v-model={kind.value} />
+        ]} v-model={selectStore.selectKindSta} />
         <LineChart data={betterData1.value}/>
         <PieChart data={betterData2.value} />
         <Bars data={betterData3.value}/>

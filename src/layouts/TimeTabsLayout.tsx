@@ -1,12 +1,12 @@
 import { Overlay } from 'vant';
-import { Component, DefineComponent, defineComponent, PropType, reactive, ref } from 'vue';
-import { ItemSummary } from '../components/item/ItemSummary';
+import { defineComponent, PropType, reactive, ref } from 'vue';
 import { Form, FormItem } from '../shared/Form';
 import { OverlayIcon } from '../shared/Overlay';
 import { Tab, Tabs } from '../shared/Tabs';
 import { Time } from '../shared/time';
 import s from './TimeTabsLayout.module.scss';
 import { MainLayout } from './MainLayout';
+import { useSelectStore } from '../stores/userSelectStore';
 const demo = defineComponent({
   props: {
     startDate: {
@@ -35,7 +35,7 @@ export const TimeTabsLayout = defineComponent({
     }
   },
   setup: (props, context) => {
-    const refSelected = ref('本月')
+    const selectStore = useSelectStore()
     const time = new Time()
     const tempTime = reactive({
       start: time.format(),
@@ -80,7 +80,7 @@ export const TimeTabsLayout = defineComponent({
               {props.hideThisYear ? (
                 <Tabs
                   classPrefix="customTabs"
-                  v-model:selected={refSelected.value}
+                  v-model:selected={selectStore.selectTab}
                   onUpdate:selected={onSelect}
                   rerenderOnSelect={props.rerenderOnSwitchTab}
                 >
@@ -97,7 +97,7 @@ export const TimeTabsLayout = defineComponent({
               ) : (
                 <Tabs
                   classPrefix="customTabs"
-                  v-model:selected={refSelected.value}
+                  v-model:selected={selectStore.selectTabSta}
                   onUpdate:selected={onSelect}
                   rerenderOnSelect={props.rerenderOnSwitchTab}
                 >

@@ -13,6 +13,7 @@ import s from './ItemCreate.module.scss';
 import { Tags } from './Tags';
 import { BackIcon } from '../../shared/BackIcon';
 import { hasError, validate } from '../../shared/validate';
+import { useSelectStore } from '../../stores/userSelectStore';
 export const ItemCreate = defineComponent({
   props: {
     name: {
@@ -20,12 +21,14 @@ export const ItemCreate = defineComponent({
     },
   },
   setup: (props, context) => {
+    const selectStore = useSelectStore()
     const formData = reactive<Partial<Item>>({
-      kind: 'expenses',
+      kind: selectStore.selectKind,
       tag_ids: [],
       amount: 0,
       happen_at: new Date().toISOString()
     })
+    console.log('formData:',formData,selectStore.selectKind)
     const errors = reactive<FormErrors<typeof formData>>({ kind: [], tag_ids: [], amount: [], happen_at: [] })
     const router = useRouter()
     const onError = (error: AxiosError<ResourceError>) => {
@@ -64,7 +67,7 @@ export const ItemCreate = defineComponent({
           default: () => (
             <>
               <div class={s.wrapper}>
-                <Tabs v-model:selected={formData.kind} class={s.tabs}>
+                <Tabs v-model:selected={selectStore.selectKind} class={s.tabs}>
                 <Tab value="expenses" name="支出">
                     <Tags kind="expenses" v-model:selected={formData.tag_ids![0]} />
                   </Tab>
