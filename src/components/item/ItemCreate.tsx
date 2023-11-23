@@ -55,6 +55,7 @@ export const ItemCreate = defineComponent({
         })
         return
       }
+      Object.assign(formData,{kind: selectStore.selectKind})
       await http.post<Resource<Item>>('/items', formData, { _mock: 'itemCreate', _autoLoading: true }).catch(onError)
       router.push('/items')
     }
