@@ -18,4 +18,12 @@ const div = ref<HTMLDivElement | null>(null);
 
 ## 如何开发
 
+```bash
+ pnpm run dev
+```
+
 ## 如何打包
+
+```bash
+ pnpm run build
+```
